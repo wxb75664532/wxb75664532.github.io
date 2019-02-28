@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>My frist Blog</title>
+      <link href="/2019/02/27/My-frist-Blog/"/>
+      <url>/2019/02/27/My-frist-Blog/</url>
+      
+        <content type="html"><![CDATA[<p>大三的时候，在学习期间，总是会遇到一系列的问题。无论是编程的bug还是编译环境的error，有时候还会遇到编译器问题等。每个问题几乎都会让我花费大量的时间在网上找个答案。结果第二次遇到相同问题的时候,结果又花费大量的时间去网上找解决方案，实属困难。所以我想将我遇到的难以解决的问题与解决方案一起发布成博客！</p><h2 id="加油！"><a href="#加油！" class="headerlink" title="加油！"></a>加油！</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> welcomes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> frist_blog </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
