@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>LNK2019问题</title>
+      <link href="/2019/03/01/LNK2019%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/03/01/LNK2019%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p><excerpt in index |首页摘要>今天在编译d3dx9的测试案例时被一个错误困扰了几个小时，说到底还是对vs编译器的不熟悉！<a id="more"></a><the rest of contents>对于这个问题在网上找了很久的错误，终于找到了令人满意的答案（因为该错误有点愚蠢，估计很少人会犯吧.</the></excerpt></p><h2 id="×问题描述×"><a href="#×问题描述×" class="headerlink" title="×问题描述×"></a>×问题描述×</h2><h3 id="问题1："><a href="#问题1：" class="headerlink" title="问题1："></a>问题1：</h3><p><img src="/img/LNK2019问题_img/Lnk2019_1.png" alt="error1"></p><p>WinMain函数是win32应用程序的入口点，而我创建的是窗口应用程序，却用着main入口函数。如果入口函数指定不当，就会报此错误</p><h3 id="问题2："><a href="#问题2：" class="headerlink" title="问题2："></a>问题2：</h3><p>同理如果选择的是win32控制台程序却用着winMain入口函数，则会报相同的lnk2019错误。<br><img src="/img/LNK2019问题_img/Lnk2019_2.png" alt="error2"></p><p>那么如何修改呢（当然可以重新删除项目，创建相对应的项目，不过有一点麻烦咯）</p><h2 id="×解决方法×"><a href="#×解决方法×" class="headerlink" title="×解决方法×"></a>×解决方法×</h2><p>首先进入项目属性，找到c/c++/预处理器，进入编辑定义。高亮部分由/分割<br>_CONSOLE和_WINDOWS。如图所示：<br><img src="/img/LNK2019问题_img/attribute_1.png" alt="c/c++/预处理器"></p><p>前者是控制台程序用于MAIN入口函数，后者是窗体程序用于WINMAIN入口函数。选择其中一个就行。当然修改这一点还是不行的，还要修改子系统，如图对应修改就可以啦。</p><p><img src="/img/LNK2019问题_img/attribute_2.png" alt="连接器/系统"></p><p>参考地址：<a href="https://blog.csdn.net/luoyayun361/article/details/84403579" target="_blank" rel="noopener">https://blog.csdn.net/luoyayun361/article/details/84403579</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> VS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 问题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>My frist Blog</title>
       <link href="/2019/02/27/My-frist-Blog/"/>
       <url>/2019/02/27/My-frist-Blog/</url>
