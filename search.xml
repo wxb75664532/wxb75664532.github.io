@@ -4,23 +4,48 @@
   
     
     <entry>
-      <title>LNK2019问题</title>
-      <link href="/2019/03/01/LNK2019%E9%97%AE%E9%A2%98/"/>
-      <url>/2019/03/01/LNK2019%E9%97%AE%E9%A2%98/</url>
+      <title>Andriod Studio无法打开虚拟机</title>
+      <link href="/2019/03/03/Andriod-Studio%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+      <url>/2019/03/03/Andriod-Studio%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E8%99%9A%E6%8B%9F%E6%9C%BA/</url>
       
-        <content type="html"><![CDATA[<p><excerpt in index |首页摘要>今天在编译d3dx9的测试案例时被一个错误困扰了几个小时，说到底还是对vs编译器的不熟悉！<a id="more"></a><the rest of contents>对于这个问题在网上找了很久的错误，终于找到了令人满意的答案（因为该错误有点愚蠢，估计很少人会犯吧.</the></excerpt></p><h2 id="×问题描述×"><a href="#×问题描述×" class="headerlink" title="×问题描述×"></a>×问题描述×</h2><h3 id="问题1："><a href="#问题1：" class="headerlink" title="问题1："></a>问题1：</h3><p><img src="/img/LNK2019问题_img/Lnk2019_1.png" alt="error1"></p><p>WinMain函数是win32应用程序的入口点，而我创建的是窗口应用程序，却用着main入口函数。如果入口函数指定不当，就会报此错误</p><h3 id="问题2："><a href="#问题2：" class="headerlink" title="问题2："></a>问题2：</h3><p>同理如果选择的是win32控制台程序却用着winMain入口函数，则会报相同的lnk2019错误。<br><img src="/img/LNK2019问题_img/Lnk2019_2.png" alt="error2"></p><p>那么如何修改呢（当然可以重新删除项目，创建相对应的项目，不过有一点麻烦咯）</p><h2 id="×解决方法×"><a href="#×解决方法×" class="headerlink" title="×解决方法×"></a>×解决方法×</h2><p>首先进入项目属性，找到c/c++/预处理器，进入编辑定义。高亮部分由/分割<br>_CONSOLE和_WINDOWS。如图所示：<br><img src="/img/LNK2019问题_img/attribute_1.png" alt="c/c++/预处理器"></p><p>前者是控制台程序用于MAIN入口函数，后者是窗体程序用于WINMAIN入口函数。选择其中一个就行。当然修改这一点还是不行的，还要修改子系统，如图对应修改就可以啦。</p><p><img src="/img/LNK2019问题_img/attribute_2.png" alt="连接器/系统"></p><p>参考地址：<a href="https://blog.csdn.net/luoyayun361/article/details/84403579" target="_blank" rel="noopener">https://blog.csdn.net/luoyayun361/article/details/84403579</a></p>]]></content>
+        <content type="html"><![CDATA[<p>##问题描述<br>我们都知道使用andriod studio都必须要有手机模拟器或者链接手机，才能让程序跑起来。</p><p>今天我第一次Run的时候出现了一个很无语的错误，模拟器也没有打开。</p><p>报错如下：</p><blockquote><p>Emulator: [5984]:ERROR:android/android-emu/android/qt/qt_setup.cpp:<br>28:Qtlibrary not found at D:\AndroidSDK\emulator\lib64\qt\li </p></blockquote><blockquote><p>Emulator: Could not launch ‘D:\AndroidSDK\emulator/qemu/windows-x86_64/<br>qemu-system-i386.exe’: No such file or directory</p></blockquote><blockquote><p>Emulator: Process finished with exit code 2</p></blockquote><p>错误原因是一个emulator文件夹的丢失，我最初也看不懂这个错误，在网上查了好久，一直都是说emulator文件夹丢失。解决方案就是复制博主的文件夹，然后粘贴就行了，但是很难找到粘贴的位置。</p><p>不过我在一个博客上看到了另一个答案，就是进去SDK Manager下载就可以了，完全不用知道要在哪个文件夹下。</p><p>如图：<br><img src="/img/Andriod-Studio无法打开虚拟机_img/SDK_Manager.png" alt></p><p>参考地址：<a href="https://blog.csdn.net/qq_38785971/article/details/82467174" target="_blank" rel="noopener">https://blog.csdn.net/qq_38785971/article/details/82467174</a></p>]]></content>
       
       
       <categories>
           
-          <category> VS </category>
+          <category> 问题 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 问题 </tag>
+            <tag> Andriod Studio </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>LNK2019问题</title>
+      <link href="/2019/03/01/LNK2019%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/03/01/LNK2019%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p><excerpt in index |首页摘要>今天在编译d3dx9的测试案例时被一个错误困扰了几个小时，说到底还是对vs编译器的不熟悉！<a id="more"></a><the rest of contents>对于这个问题在网上找了很久的错误，终于找到了令人满意的答案（因为该错误有点愚蠢，估计很少人会犯吧.</the></excerpt></p><h2 id="×问题描述×"><a href="#×问题描述×" class="headerlink" title="×问题描述×"></a>×问题描述×</h2><h3 id="问题1："><a href="#问题1：" class="headerlink" title="问题1："></a>问题1：</h3><p><img src="/img/LNK2019问题_img/Lnk2019_1.png" alt></p><p>WinMain函数是win32应用程序的入口点，而我创建的是窗口应用程序，却用着main入口函数。如果入口函数指定不当，就会报此错误</p><h3 id="问题2："><a href="#问题2：" class="headerlink" title="问题2："></a>问题2：</h3><p>同理如果选择的是win32控制台程序却用着winMain入口函数，则会报相同的lnk2019错误。<br><img src="/img/LNK2019问题_img/Lnk2019_2.png" alt></p><p>那么如何修改呢（当然可以重新删除项目，创建相对应的项目，不过有一点麻烦咯）</p><h2 id="×解决方法×"><a href="#×解决方法×" class="headerlink" title="×解决方法×"></a>×解决方法×</h2><p>首先进入项目属性，找到c/c++/预处理器，进入编辑定义。高亮部分由/分割<br>_CONSOLE和_WINDOWS。如图所示：<br><img src="/img/LNK2019问题_img/attribute_1.png" alt></p><p>前者是控制台程序用于MAIN入口函数，后者是窗体程序用于WINMAIN入口函数。选择其中一个就行。当然修改这一点还是不行的，还要修改子系统，如图对应修改就可以啦。</p><p><img src="/img/LNK2019问题_img/attribute_2.png" alt></p><p>参考地址：<a href="https://blog.csdn.net/luoyayun361/article/details/84403579" target="_blank" rel="noopener">https://blog.csdn.net/luoyayun361/article/details/84403579</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 问题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Visual Studio </tag>
             
         </tags>
       
@@ -36,16 +61,10 @@
         <content type="html"><![CDATA[<p>大三的时候，在学习期间，总是会遇到一系列的问题。无论是编程的bug还是编译环境的error，有时候还会遇到编译器问题等。每个问题几乎都会让我花费大量的时间在网上找个答案。结果第二次遇到相同问题的时候,结果又花费大量的时间去网上找解决方案，实属困难。所以我想将我遇到的难以解决的问题与解决方案一起发布成博客！</p><h2 id="加油！"><a href="#加油！" class="headerlink" title="加油！"></a>加油！</h2>]]></content>
       
       
-      <categories>
-          
-          <category> welcomes </category>
-          
-      </categories>
-      
       
         <tags>
             
-            <tag> frist_blog </tag>
+            <tag> welcome </tag>
             
         </tags>
       

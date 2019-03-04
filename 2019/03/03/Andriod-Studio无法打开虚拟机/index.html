@@ -15,14 +15,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="404">
-<meta property="og:url" content="http://wxb75664532.github.io/404.html">
+<meta name="description" content="上手机应用开发的第一节实验课，遇到了严重的问题！对于初学者真的是很难看懂">
+<meta name="keywords" content="Andriod Studio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Andriod Studio无法打开虚拟机">
+<meta property="og:url" content="http://wxb75664532.github.io/2019/03/03/Andriod-Studio无法打开虚拟机/index.html">
 <meta property="og:site_name" content="小颜的技术博客">
+<meta property="og:description" content="上手机应用开发的第一节实验课，遇到了严重的问题！对于初学者真的是很难看懂">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-28T14:39:51.725Z">
+<meta property="og:image" content="http://wxb75664532.github.io/img/Andriod-Studio无法打开虚拟机_img/SDK_Manager.png">
+<meta property="og:updated_time" content="2019-03-04T08:40:29.494Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="404">
+<meta name="twitter:title" content="Andriod Studio无法打开虚拟机">
+<meta name="twitter:description" content="上手机应用开发的第一节实验课，遇到了严重的问题！对于初学者真的是很难看懂">
+<meta name="twitter:image" content="http://wxb75664532.github.io/img/Andriod-Studio无法打开虚拟机_img/SDK_Manager.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -54,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>404 | 小颜的技术博客</title>
+<title>Andriod Studio无法打开虚拟机 | 小颜的技术博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -64,7 +70,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -265,11 +271,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Andriod-Studio无法打开虚拟机" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/404.html" class="article-date">
-      <time datetime="2019-02-28T14:39:20.000Z" itemprop="datePublished">2019-02-28</time>
+      <a href="/2019/03/03/Andriod-Studio无法打开虚拟机/" class="article-date">
+      <time datetime="2019-03-04T06:44:08.000Z" itemprop="datePublished">2019-03-03</time>
 </a>
 
 
@@ -284,7 +290,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      404
+      Andriod Studio无法打开虚拟机
     </h1>
   
 
@@ -292,8 +298,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/问题/">问题</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andriod-Studio/">Andriod Studio</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -301,33 +315,56 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
+        <p>##问题描述<br>我们都知道使用andriod studio都必须要有手机模拟器或者链接手机，才能让程序跑起来。</p>
+<p>今天我第一次Run的时候出现了一个很无语的错误，模拟器也没有打开。</p>
+<p>报错如下：</p>
+<blockquote>
+<p>Emulator: [5984]:ERROR:android/android-emu/android/qt/qt_setup.cpp:<br>28:Qtlibrary not found at D:\AndroidSDK\emulator\lib64\qt\li </p>
+</blockquote>
+<blockquote>
+<p>Emulator: Could not launch ‘D:\AndroidSDK\emulator/qemu/windows-x86_64/<br>qemu-system-i386.exe’: No such file or directory</p>
+</blockquote>
+<blockquote>
+<p>Emulator: Process finished with exit code 2</p>
+</blockquote>
+<p>错误原因是一个emulator文件夹的丢失，我最初也看不懂这个错误，在网上查了好久，一直都是说emulator文件夹丢失。解决方案就是复制博主的文件夹，然后粘贴就行了，但是很难找到粘贴的位置。</p>
+<p>不过我在一个博客上看到了另一个答案，就是进去SDK Manager下载就可以了，完全不用知道要在哪个文件夹下。</p>
+<p>如图：<br><img src="/img/Andriod-Studio无法打开虚拟机_img/SDK_Manager.png" alt></p>
+<p>参考地址：<a href="https://blog.csdn.net/qq_38785971/article/details/82467174" target="_blank" rel="noopener">https://blog.csdn.net/qq_38785971/article/details/82467174</a></p>
 
-
-          
-        
       
     </div>
     
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/03/03/Andriod-Studio无法打开虚拟机/">Andriod Studio无法打开虚拟机</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">ZhiCheng Yan</a></p>
+        <p><span>发布时间:</span>2019-03-03, 22:44:08</p>
+        <p><span>最后更新:</span>2019-03-04, 00:40:29</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/03/03/Andriod-Studio无法打开虚拟机/" title="Andriod Studio无法打开虚拟机">http://wxb75664532.github.io/2019/03/03/Andriod-Studio无法打开虚拟机/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://wxb75664532.github.io/2019/03/03/Andriod-Studio无法打开虚拟机/　　作者: ZhiCheng Yan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/03/01/LNK2019问题/">
+                    LNK2019问题
+                </a>
+            </div>
+        
+    </nav>
 
   
 </article>
@@ -336,6 +373,48 @@
 
 
 
+    
+        <section id="comments">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'http://wxb75664532.github.io/2019/03/03/Andriod-Studio无法打开虚拟机/';
+            this.page.identifier = '2019/03/03/Andriod-Studio无法打开虚拟机/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//yzc-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+</section>
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/03/01/LNK2019问题/" title="下一篇: LNK2019问题">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/03/Andriod-Studio无法打开虚拟机/">Andriod Studio无法打开虚拟机</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/LNK2019问题/">LNK2019问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/My-frist-Blog/">My frist Blog</a></li></ul>
 
 
 
