@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="小颜的技术博客">
 <meta property="og:description" content="最近利用SpringJDBC来进行MySQL数据库编程，写好配置文件却报了一个警告：WARN: Establishing SSL connection">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-10T16:08:47.929Z">
+<meta property="og:updated_time" content="2019-03-10T16:11:23.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql报警告">
 <meta name="twitter:description" content="最近利用SpringJDBC来进行MySQL数据库编程，写好配置文件却报了一个警告：WARN: Establishing SSL connection">
@@ -322,8 +322,8 @@
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>我查了很久，解决方案也很简单。<br>只需要在链接数据库的URL中添加一句useSSL=false。当然值为false是指不需要建立安全的链接。相反为Ture就是安全的链接。按照自己的需求选择都可以。</p>
 <p>比如我在Spring JDBC中的URL链接</p>
 <blockquote>
-<property name="url" value="jdbc:mysql://127.0.0.1:3306/spring?characterEncoding=utf8&useSSL=false">
-</property></blockquote>
+<p>property name=”url” value=”jdbc:mysql://127.0.0.1:3306/spring?characterEncoding=utf8&amp;useSSL=false”</p>
+</blockquote>
 <p>我看了很多博客都是这么写的，<strong>但是我这么用还是会报错</strong></p>
 <p>报错信息如下：</p>
 <blockquote>
@@ -343,7 +343,7 @@
         <p><span>本文标题:</span><a href="/2019/03/10/Mysql报警告/">Mysql报警告</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">ZhiCheng Yan</a></p>
         <p><span>发布时间:</span>2019-03-10, 06:49:29</p>
-        <p><span>最后更新:</span>2019-03-10, 09:08:47</p>
+        <p><span>最后更新:</span>2019-03-10, 09:11:23</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/03/10/Mysql报警告/" title="Mysql报警告">http://wxb75664532.github.io/2019/03/10/Mysql报警告/</a>
             <span class="copy-path" data-clipboard-text="原文: http://wxb75664532.github.io/2019/03/10/Mysql报警告/　　作者: ZhiCheng Yan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
