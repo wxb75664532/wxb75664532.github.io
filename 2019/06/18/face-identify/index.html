@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="在前面一节我们讲了基于XML配置文件的装配方式。尽管使用XML配置文件可以很简单地装配Bean，但如果应用中有大量的Bean需要配置，会导致XML文件过于庞大，不方便以后的维护和升级">
-<meta name="keywords" content="JavaSpring">
+<meta name="description" content="第一次接触到人脸识别，我将写下此次博客，用来详细描述利用百度云提供的API做一个人脸识别demo的过程">
+<meta name="keywords" content="java API">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Bean的装配方式(2)-基于注释的装配">
-<meta property="og:url" content="http://wxb75664532.github.io/2019/03/06/Bean的装配方式-2/index.html">
+<meta property="og:title" content="face_identify">
+<meta property="og:url" content="http://wxb75664532.github.io/2019/06/18/face-identify/index.html">
 <meta property="og:site_name" content="小颜的技术博客">
-<meta property="og:description" content="在前面一节我们讲了基于XML配置文件的装配方式。尽管使用XML配置文件可以很简单地装配Bean，但如果应用中有大量的Bean需要配置，会导致XML文件过于庞大，不方便以后的维护和升级">
+<meta property="og:description" content="第一次接触到人脸识别，我将写下此次博客，用来详细描述利用百度云提供的API做一个人脸识别demo的过程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-18T15:14:43.948Z">
+<meta property="og:updated_time" content="2019-06-18T15:19:31.789Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bean的装配方式(2)-基于注释的装配">
-<meta name="twitter:description" content="在前面一节我们讲了基于XML配置文件的装配方式。尽管使用XML配置文件可以很简单地装配Bean，但如果应用中有大量的Bean需要配置，会导致XML文件过于庞大，不方便以后的维护和升级">
+<meta name="twitter:title" content="face_identify">
+<meta name="twitter:description" content="第一次接触到人脸识别，我将写下此次博客，用来详细描述利用百度云提供的API做一个人脸识别demo的过程">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Bean的装配方式(2)-基于注释的装配 | 小颜的技术博客</title>
+<title>face_identify | 小颜的技术博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -269,11 +269,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="post-Bean的装配方式-2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-face-identify" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/03/06/Bean的装配方式-2/" class="article-date">
-      <time datetime="2019-03-07T03:06:53.000Z" itemprop="datePublished">2019-03-06</time>
+      <a href="/2019/06/18/face-identify/" class="article-date">
+      <time datetime="2019-06-18T14:35:19.000Z" itemprop="datePublished">2019-06-18</time>
 </a>
 
 
@@ -288,7 +288,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Bean的装配方式(2)-基于注释的装配
+      face_identify
     </h1>
   
 
@@ -297,13 +297,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/学习/">学习</a>
+    <a class="article-category-link" href="/categories/百度人脸识别demo/">百度人脸识别demo</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaSpring/">JavaSpring</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-API/">java API</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -313,42 +313,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在前面一节我们讲了基于XML配置文件的装配方式。<excerpt in index |首页摘要>尽管使用XML配置文件可以很简单地装配Bean，但如果应用中有大量的Bean需要配置，会导致XML文件过于庞大，不方便以后的维护和升级<a id="more"></a><the rest of contents>因此第二种基于注释的装配方式更受到开发者的热爱。在这节中我们也将走进基于注释的装配方式。</the></excerpt></p>
-<h2 id="基于注释的装配"><a href="#基于注释的装配" class="headerlink" title="基于注释的装配"></a>基于注释的装配</h2><p>下面介绍几种常用的注解：</p>
-<h3 id="Component"><a href="#Component" class="headerlink" title="@Component"></a>@Component</h3><p>该注解是一个泛化的概念，仅仅表示一个组件对象，可以作用在任何层次上。</p>
-<h3 id="Repository"><a href="#Repository" class="headerlink" title="@Repository"></a>@Repository</h3><p>该注解将数据访问层(DAO)的类标识为Bean，即注解数据访问层Bean，功能和@Component相同</p>
-<h3 id="Service"><a href="#Service" class="headerlink" title="@Service"></a>@Service</h3><p>该注解用于标注一个业务逻辑组件类(Service层)。功能和@Component相同</p>
-<h3 id="Controller"><a href="#Controller" class="headerlink" title="@Controller"></a>@Controller</h3><p>该注解用于标注一个控制器组件类(Spring MVC的Controller)，功能和@Component相同</p>
-<h3 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h3><p>该注解从字面上理解就是：自动地进行装配。可以对成员变量，方法，以及构造方法进行标注，完成自动装配的工作。通过用@Autowired来消除setter和getter方法。默认安装Bean的类型进行装配。</p>
-<p><strong>如果当Bean类型有多个实例的时候，该注释就要报错，抛出异常：</strong></p>
-<blockquote>
-<p>org.springframework.beans.factory.BeanCreationException</p>
-</blockquote>
-<p><strong><em>关于 @Autowired注释List和Map 详情参考链接<a href="https://blog.csdn.net/z69183787/article/details/78834547" target="_blank" rel="noopener">https://blog.csdn.net/z69183787/article/details/78834547</a></em></strong></p>
-<h3 id="Qualifier"><a href="#Qualifier" class="headerlink" title="@Qualifier"></a>@Qualifier</h3><p>该注解与@Autowired注释配合使用。之前我们说道，当Bean类型有多个实例的时候，使用@Autowired就会报错。所以当@Autowired注释需要按照名称来装配注入时和该注解一起使用。<br>实例名称由次注释的参数制定。举个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Autowired  </span><br><span class="line">@Qualifier(&quot;beanTestDao&quot;)  </span><br><span class="line">private BeanImpl beanImpl;</span><br></pre></td></tr></table></figure></p>
-<h3 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h3><p>该注解和@Autowired的功能一样，唯一的区别就是该注释默认是按照名称来装配注入的，只有当找不到与名称匹配的Bean才会按照类型来装配注入。<br>@Resource注解有两个属性 –name(按名称装配注入)和type(按类型装配注入)</p>
-<hr>
-<p><strong>虽然@Repository,@Service,@Controller三种注释的功能@Component注释相同，但是为了使类的标注更加层次化，在实际开发中推荐使用@Repository标注数据访问层、使用@Service标注业务逻辑层、使用@Controller标注控制层</strong></p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>现在通过一个实例来说明上述的注释方法<br><strong>注：在Spring4.0以上的版本，配置注解指定包中的注释进行扫描前需要格外导入SpringAOP JAR包中的spring-aop-(版本号).RELEASE.jar</strong></p>
-<hr>
-<p>创建dao包，在该包下创建TestDao接口和TestDaoImpl实现类，实现类用@Repository注释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">package annotation.dao;</span><br><span class="line">public interface TestDao &#123;</span><br><span class="line">	public void save();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package annotation.dao;</span><br><span class="line">import org.springframework.stereotype.Repository;</span><br><span class="line">@Repository(&quot;testDao&quot;)</span><br><span class="line">public class TestDaoImpl implements TestDao&#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void save() &#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>创建Service包，在该包下创建TestService接口和TestServiceImpl实现类，实现类用@Service注释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">package annotation.service;</span><br><span class="line">public interface TestService &#123;</span><br><span class="line">	public void save();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package annotation.service;</span><br><span class="line">import javax.annotation.Resource;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line">import annotation.dao.TestDao;</span><br><span class="line"></span><br><span class="line">@Service(&quot;testService&quot;)</span><br><span class="line">public class TestServiceImpl implements TestService&#123;</span><br><span class="line"></span><br><span class="line">	@Resource(name=&quot;testDao&quot;)</span><br><span class="line">	private TestDao testDao;</span><br><span class="line">	@Override</span><br><span class="line">	public void save() &#123;</span><br><span class="line">		testDao.save();</span><br><span class="line">		System.out.println(&quot;testService save&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>创建controller包，在该包中创建TestController类，并用@Controller注释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package annotation.controller;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import annotation.service.TestService;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class TestController &#123;</span><br><span class="line">	@Autowired</span><br><span class="line">	private TestService testService;</span><br><span class="line">	</span><br><span class="line">	public void save()</span><br><span class="line">	&#123;</span><br><span class="line">		testService.save();</span><br><span class="line">		System.out.println(&quot;testController save&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>将之前创建的包全部放入同一个annotation包下，修改XMl配置文件，添加</p>
-<blockquote>
-<p>&lt;context:component-scan base-package=”annotation” /&gt;</p>
-</blockquote>
-<p><strong><em>具体XML文件的修改请参考[<a href="https://blog.csdn.net/qq_38801354/article/details/81271763]https://blog.csdn.net/qq_38801354/article/details/81271763]" target="_blank" rel="noopener">https://blog.csdn.net/qq_38801354/article/details/81271763]https://blog.csdn.net/qq_38801354/article/details/81271763]</a></em></strong></p>
-<p>测试类通过构造方法实例化创建TestController对象，调用save方法。结果如下</p>
-<blockquote>
-<p>test save<br>testService save<br>testController save</p>
-</blockquote>
-<p>常用的注释方法到这里基本讲完了，Bean的装配方式也就此完结。希望对大家有所帮助</p>
-<p><strong><em>参考书籍:  JavaEE框架整合开发入门到实践+SSM (清华大学出版社)</em></strong></p>
+        <p>某一天，我突然想起想做一个人脸识别的登录系统，可以用在以后的作业当中。嘿嘿嘿，这小算盘还是可以的吧。于是我撸起袖子就做了起来，到处查找资料(实在不想写人脸识别算法…哈哈哈哈，其实是不会写)。也没有找多久，就发现了一个百度云的人脸识别API，所以我也不废话了，开始正式步骤。</p>
+<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>我使用的是IDEA编译器，直接创建了一个springboot项目，设置好相关的maven依赖。这样还不完善，还要进入到pom.xml文件添加如下依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/com.baidu.aip/java-sdk --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.baidu.aip&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;java-sdk&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.8.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/com.google.gson/gson --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;gson&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这样一个一个最基本的face_identify项目已经建好了</p>
+<h3 id="添加相关的百度java文件"><a href="#添加相关的百度java文件" class="headerlink" title="添加相关的百度java文件"></a>添加相关的百度java文件</h3><p>请分别下载下面的java文件，并导入已经创建好的face_identify项目中<br><a href="https://ai.baidu.com/file/658A35ABAB2D404FBF903F64D47C1F72" target="_blank" rel="noopener">FileUtil.java</a><br><a href="https://ai.baidu.com/file/C8D81F3301E24D2892968F09AE1AD6E2" target="_blank" rel="noopener">Base64Util.java</a><br><a href="https://ai.baidu.com/file/544D677F5D4E4F17B4122FBD60DB82B3" target="_blank" rel="noopener">HttpUtil.java</a><br><a href="https://ai.baidu.com/file/470B3ACCA3FE43788B5A963BF0B625F3" target="_blank" rel="noopener">GsonUtils.java</a></p>
 
       
     </div>
@@ -357,13 +325,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/03/06/Bean的装配方式-2/">Bean的装配方式(2)-基于注释的装配</a></p>
+        <p><span>本文标题:</span><a href="/2019/06/18/face-identify/">face_identify</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">ZhiCheng Yan</a></p>
-        <p><span>发布时间:</span>2019-03-06, 19:06:53</p>
-        <p><span>最后更新:</span>2019-06-18, 08:14:43</p>
+        <p><span>发布时间:</span>2019-06-18, 07:35:19</p>
+        <p><span>最后更新:</span>2019-06-18, 08:19:31</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/03/06/Bean的装配方式-2/" title="Bean的装配方式(2)-基于注释的装配">http://wxb75664532.github.io/2019/03/06/Bean的装配方式-2/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://wxb75664532.github.io/2019/03/06/Bean的装配方式-2/　　作者: ZhiCheng Yan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/06/18/face-identify/" title="face_identify">http://wxb75664532.github.io/2019/06/18/face-identify/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://wxb75664532.github.io/2019/06/18/face-identify/　　作者: ZhiCheng Yan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -375,16 +343,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/03/10/Mysql报警告/">
-                    Mysql报警告
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/03/05/Bean的装配方式/">
-                    Bean的装配方式(1)-基于XML配置的装配
+                <a href="/2019/03/10/Mysql报警告/">
+                    Mysql报警告
                 </a>
             </div>
         
@@ -396,7 +358,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基于注释的装配"><span class="toc-number">1.</span> <span class="toc-text">基于注释的装配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Component"><span class="toc-number">1.1.</span> <span class="toc-text">@Component</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Repository"><span class="toc-number">1.2.</span> <span class="toc-text">@Repository</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Service"><span class="toc-number">1.3.</span> <span class="toc-text">@Service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Controller"><span class="toc-number">1.4.</span> <span class="toc-text">@Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Autowired"><span class="toc-number">1.5.</span> <span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Qualifier"><span class="toc-number">1.6.</span> <span class="toc-text">@Qualifier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resource"><span class="toc-number">1.7.</span> <span class="toc-text">@Resource</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">2.</span> <span class="toc-text">实例</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建项目"><span class="toc-number">1.</span> <span class="toc-text">新建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加相关的百度java文件"><span class="toc-number">2.</span> <span class="toc-text">添加相关的百度java文件</span></a></li></ol>
         
     </div>
     <style>
@@ -426,8 +388,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'http://wxb75664532.github.io/2019/03/06/Bean的装配方式-2/';
-            this.page.identifier = '2019/03/06/Bean的装配方式-2/';
+            this.page.url = 'http://wxb75664532.github.io/2019/06/18/face-identify/';
+            this.page.identifier = '2019/06/18/face-identify/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -449,15 +411,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/03/10/Mysql报警告/" title="上一篇: Mysql报警告">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/03/05/Bean的装配方式/" title="下一篇: Bean的装配方式(1)-基于XML配置的装配">
+            <a href="/2019/03/10/Mysql报警告/" title="下一篇: Mysql报警告">
                 <i class="fa fa-angle-right"></i>
             </a>
         
