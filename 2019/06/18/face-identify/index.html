@@ -23,10 +23,13 @@
 <meta property="og:site_name" content="小颜的技术博客">
 <meta property="og:description" content="第一次接触到人脸识别，我将写下此次博客，用来详细描述利用百度云提供的API做一个人脸识别demo的过程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-18T15:19:31.789Z">
+<meta property="og:image" content="http://wxb75664532.github.io/img/face-identify/baiduyun1.png">
+<meta property="og:image" content="http://wxb75664532.github.io/img/face-identify/baiduyun2.png">
+<meta property="og:updated_time" content="2019-06-19T02:16:59.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="face_identify">
 <meta name="twitter:description" content="第一次接触到人脸识别，我将写下此次博客，用来详细描述利用百度云提供的API做一个人脸识别demo的过程">
+<meta name="twitter:image" content="http://wxb75664532.github.io/img/face-identify/baiduyun1.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -317,6 +320,12 @@
 <h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>我使用的是IDEA编译器，直接创建了一个springboot项目，设置好相关的maven依赖。这样还不完善，还要进入到pom.xml文件添加如下依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/com.baidu.aip/java-sdk --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.baidu.aip&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;java-sdk&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.8.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/com.google.gson/gson --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;gson&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
 <p>这样一个一个最基本的face_identify项目已经建好了</p>
 <h3 id="添加相关的百度java文件"><a href="#添加相关的百度java文件" class="headerlink" title="添加相关的百度java文件"></a>添加相关的百度java文件</h3><p>请分别下载下面的java文件，并导入已经创建好的face_identify项目中<br><a href="https://ai.baidu.com/file/658A35ABAB2D404FBF903F64D47C1F72" target="_blank" rel="noopener">FileUtil.java</a><br><a href="https://ai.baidu.com/file/C8D81F3301E24D2892968F09AE1AD6E2" target="_blank" rel="noopener">Base64Util.java</a><br><a href="https://ai.baidu.com/file/544D677F5D4E4F17B4122FBD60DB82B3" target="_blank" rel="noopener">HttpUtil.java</a><br><a href="https://ai.baidu.com/file/470B3ACCA3FE43788B5A963BF0B625F3" target="_blank" rel="noopener">GsonUtils.java</a></p>
+<h3 id="百度云相关操作"><a href="#百度云相关操作" class="headerlink" title="百度云相关操作"></a>百度云相关操作</h3><p>首先登录百度云，找到人脸识别服务<br><img src="/img/face-identify/baiduyun1.png" alt><br>新建自己的项目，为这个项目设置相关的人脸库</p>
+<hr>
+<p>人脸库有一些属性，用户组，用户ID，用户信息等等<strong>需要记住，每次请求获取返回数据的时候可能需要</strong><br><img src="/img/face-identify/baiduyun2.png" alt></p>
+<h3 id="查看百度云FACE文档"><a href="#查看百度云FACE文档" class="headerlink" title="查看百度云FACE文档"></a>查看百度云FACE文档</h3><p>对于百度云人脸识别API的调用，有一个详细介绍的文档，不过这个文档现在还是V2级别的，相对于现在来说有点老了，有兴趣的可以点击链接下载<br><a href="https://bce-cdn.bj.bcebos.com/doc/pdf/FACE.zh.pdf?timeStamp=1560910176383" target="_blank" rel="noopener">https://bce-cdn.bj.bcebos.com/doc/pdf/FACE.zh.pdf?timeStamp=1560910176383</a></p>
+<hr>
+<p>想了解最新的文档可以在百度云官网查看技术文档，对于该技术文档的讲解，我将在下节专门讲两三个常用的功能</p>
 
       
     </div>
@@ -328,7 +337,7 @@
         <p><span>本文标题:</span><a href="/2019/06/18/face-identify/">face_identify</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">ZhiCheng Yan</a></p>
         <p><span>发布时间:</span>2019-06-18, 07:35:19</p>
-        <p><span>最后更新:</span>2019-06-18, 08:19:31</p>
+        <p><span>最后更新:</span>2019-06-18, 19:16:59</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/06/18/face-identify/" title="face_identify">http://wxb75664532.github.io/2019/06/18/face-identify/</a>
             <span class="copy-path" data-clipboard-text="原文: http://wxb75664532.github.io/2019/06/18/face-identify/　　作者: ZhiCheng Yan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -358,7 +367,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建项目"><span class="toc-number">1.</span> <span class="toc-text">新建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加相关的百度java文件"><span class="toc-number">2.</span> <span class="toc-text">添加相关的百度java文件</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建项目"><span class="toc-number">1.</span> <span class="toc-text">新建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加相关的百度java文件"><span class="toc-number">2.</span> <span class="toc-text">添加相关的百度java文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#百度云相关操作"><span class="toc-number">3.</span> <span class="toc-text">百度云相关操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看百度云FACE文档"><span class="toc-number">4.</span> <span class="toc-text">查看百度云FACE文档</span></a></li></ol>
         
     </div>
     <style>
