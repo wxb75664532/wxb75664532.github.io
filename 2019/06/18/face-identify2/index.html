@@ -23,12 +23,10 @@
 <meta property="og:site_name" content="小颜的技术博客">
 <meta property="og:description" content="上节我们讲到了技术文档，那么我们这节用几个案例讲讲几个常用的功能吧（第二部分）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wxb75664532.github.io/img/face-identify/baiduyun3.png">
-<meta property="og:updated_time" content="2019-06-19T03:29:23.231Z">
+<meta property="og:updated_time" content="2019-06-19T05:50:32.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="face_identify2">
 <meta name="twitter:description" content="上节我们讲到了技术文档，那么我们这节用几个案例讲讲几个常用的功能吧（第二部分）">
-<meta name="twitter:image" content="http://wxb75664532.github.io/img/face-identify/baiduyun3.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -315,23 +313,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h2><p>我们想要使用百度人脸识别API，必须先要发送请求，获取结果。<br>在技术文档中讲到了两种请求方式</p>
-<h3 id="请求URL数据格式"><a href="#请求URL数据格式" class="headerlink" title="请求URL数据格式"></a>请求URL数据格式</h3><p>向API服务地址使用POST发送请求，必须在URL中带上参数：<br>access_token: 必须参数，参考“AccessToken获取”。</p>
-<blockquote>
-<p>String results = HttpUtil.post(url, accessToken, “application/json”, param);</p>
-</blockquote>
-<hr>
-<p><strong>URL：</strong><br>根据自己的需求使用不同的url地址。</p>
-<hr>
-<p><strong>获取accessToken：</strong></p>
-<p>向授权服务地址https: [//aip.baidubce.com/oauth/2.0/token] 发送请求（推荐使用POST），并在URL中带上以下参数：</p>
-<p>grant_type： 必须参数，固定为client_credentials；<br>client_id： 必须参数，应用的API Key；<br>client_secret： 必须参数，应用的Secret Key；</p>
-<p><img src="/img/face-identify/baiduyun3.png" alt></p>
-<p>java示例代码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">package com.baidu.ai.aip.auth;</span><br><span class="line"></span><br><span class="line">import org.json.JSONObject;</span><br><span class="line"></span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line">import java.net.HttpURLConnection;</span><br><span class="line">import java.net.URL;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取token类</span><br><span class="line"> */</span><br><span class="line">public class AuthService &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取权限token</span><br><span class="line">     * @return 返回示例：</span><br><span class="line">     * &#123;</span><br><span class="line">     * &quot;access_token&quot;: &quot;24.460da4889caad24cccdb1fea17221975.2592000.1491995545.282335-1234567&quot;,</span><br><span class="line">     * &quot;expires_in&quot;: 2592000</span><br><span class="line">     * &#125;</span><br><span class="line">     */</span><br><span class="line">    public static String getAuth() &#123;</span><br><span class="line">        // 官网获取的 API Key 更新为你注册的</span><br><span class="line">        String clientId = &quot;百度云应用的AK&quot;;</span><br><span class="line">        // 官网获取的 Secret Key 更新为你注册的</span><br><span class="line">        String clientSecret = &quot;百度云应用的SK&quot;;</span><br><span class="line">        return getAuth(clientId, clientSecret);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取API访问token</span><br><span class="line">     * 该token有一定的有效期，需要自行管理，当失效时需重新获取.</span><br><span class="line">     * @param ak - 百度云官网获取的 API Key</span><br><span class="line">     * @param sk - 百度云官网获取的 Securet Key</span><br><span class="line">     * @return assess_token 示例：</span><br><span class="line">     * &quot;24.460da4889caad24cccdb1fea17221975.2592000.1491995545.282335-1234567&quot;</span><br><span class="line">     */</span><br><span class="line">    public static String getAuth(String ak, String sk) &#123;</span><br><span class="line">        // 获取token地址</span><br><span class="line">        String authHost = &quot;https://aip.baidubce.com/oauth/2.0/token?&quot;;</span><br><span class="line">        String getAccessTokenUrl = authHost</span><br><span class="line">                // 1. grant_type为固定参数</span><br><span class="line">                + &quot;grant_type=client_credentials&quot;</span><br><span class="line">                // 2. 官网获取的 API Key</span><br><span class="line">                + &quot;&amp;client_id=&quot; + ak</span><br><span class="line">                // 3. 官网获取的 Secret Key</span><br><span class="line">                + &quot;&amp;client_secret=&quot; + sk;</span><br><span class="line">        try &#123;</span><br><span class="line">            URL realUrl = new URL(getAccessTokenUrl);</span><br><span class="line">            // 打开和URL之间的连接</span><br><span class="line">            HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();</span><br><span class="line">            connection.setRequestMethod(&quot;GET&quot;);</span><br><span class="line">            connection.connect();</span><br><span class="line">            // 获取所有响应头字段</span><br><span class="line">            Map&lt;String, List&lt;String&gt;&gt; map = connection.getHeaderFields();</span><br><span class="line">            // 遍历所有的响应头字段</span><br><span class="line">            for (String key : map.keySet()) &#123;</span><br><span class="line">                System.err.println(key + &quot;---&gt;&quot; + map.get(key));</span><br><span class="line">            &#125;</span><br><span class="line">            // 定义 BufferedReader输入流来读取URL的响应</span><br><span class="line">            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));</span><br><span class="line">            String result = &quot;&quot;;</span><br><span class="line">            String line;</span><br><span class="line">            while ((line = in.readLine()) != null) &#123;</span><br><span class="line">                result += line;</span><br><span class="line">            &#125;</span><br><span class="line">            /**</span><br><span class="line">             * 返回结果示例</span><br><span class="line">             */</span><br><span class="line">            System.err.println(&quot;result:&quot; + result);</span><br><span class="line">            JSONObject jsonObject = new JSONObject(result);</span><br><span class="line">            String access_token = jsonObject.getString(&quot;access_token&quot;);</span><br><span class="line">            return access_token;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            System.err.printf(&quot;获取token失败！&quot;);</span><br><span class="line">            e.printStackTrace(System.err);</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p><strong>param参数：</strong><br>一个String，详细请看技术文档对应的API的文档，不做过多解释</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>下面我们来看看几个实例吧</p>
+        <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>下面我们来看看几个实例吧</p>
 <h3 id="人脸注册"><a href="#人脸注册" class="headerlink" title="人脸注册"></a>人脸注册</h3><p>人脸注册，也就是上传图片信息到人脸库中</p>
 <p><strong>param参数：</strong></p>
 <table>
@@ -403,11 +385,315 @@
 </tr>
 </tbody>
 </table>
-<p><strong>java代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package com.yzctest.face.tool.face;</span><br><span class="line"></span><br><span class="line">import com.yzctest.face.tool.Auth;</span><br><span class="line">import com.yzctest.face.tool.GsonUtils;</span><br><span class="line">import com.yzctest.face.tool.HttpUtil;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">public class FaceAdd &#123;</span><br><span class="line"></span><br><span class="line">    public static boolean add(Integer uid,String image)</span><br><span class="line">    &#123;</span><br><span class="line">        String url=&quot;https://aip.baidubce.com/rest/2.0/face/v3/faceset/user/add&quot;;</span><br><span class="line">        try&#123;</span><br><span class="line">            Map&lt;String,String&gt; options=new HashMap&lt;&gt;();</span><br><span class="line">            options.put(&quot;image&quot;,image);</span><br><span class="line">            options.put(&quot;image_type&quot;,&quot;BASE64&quot;);</span><br><span class="line">            options.put(&quot;user_id&quot;,uid.toString());</span><br><span class="line">            options.put(&quot;group_id&quot;,&quot;Face_Login&quot;);</span><br><span class="line"></span><br><span class="line">            String param = GsonUtils.toJson(options);</span><br><span class="line">            Auth auth=new Auth();</span><br><span class="line">            String accessToken = auth.getAuth();</span><br><span class="line"></span><br><span class="line">            String results = HttpUtil.post(url, accessToken, &quot;application/json&quot;, param);</span><br><span class="line">            String result=results.split(&quot;,&quot;)[5];</span><br><span class="line">            if(result==null)</span><br><span class="line">            &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;catch (Exception e)</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>java代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package com.yzctest.face.tool.face;</span><br><span class="line"></span><br><span class="line">import com.yzctest.face.tool.Auth;</span><br><span class="line">import com.yzctest.face.tool.GsonUtils;</span><br><span class="line">import com.yzctest.face.tool.HttpUtil;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">public class FaceAdd &#123;</span><br><span class="line"></span><br><span class="line">    ///传进来的参数是图片的BASE64数据形式</span><br><span class="line">    public static boolean add(Integer uid,String image)</span><br><span class="line">    &#123;</span><br><span class="line">        String url=&quot;https://aip.baidubce.com/rest/2.0/face/v3/faceset/user/add&quot;;</span><br><span class="line">        try&#123;</span><br><span class="line">            Map&lt;String,String&gt; options=new HashMap&lt;&gt;();</span><br><span class="line">            options.put(&quot;image&quot;,image);</span><br><span class="line">            options.put(&quot;image_type&quot;,&quot;BASE64&quot;);</span><br><span class="line">            options.put(&quot;user_id&quot;,uid.toString());</span><br><span class="line">            options.put(&quot;group_id&quot;,&quot;Face_Login&quot;);</span><br><span class="line"></span><br><span class="line">            String param = GsonUtils.toJson(options);</span><br><span class="line">            Auth auth=new Auth();</span><br><span class="line">            String accessToken = auth.getAuth();</span><br><span class="line"></span><br><span class="line">            String results = HttpUtil.post(url, accessToken, &quot;application/json&quot;, param);</span><br><span class="line">            String result=results.split(&quot;,&quot;)[5];</span><br><span class="line">            if(result==null)</span><br><span class="line">            &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;catch (Exception e)</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>返回的参数列表</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段</th>
+<th style="text-align:center">必选</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">log_id</td>
+<td style="text-align:center">是</td>
+<td>uint64</td>
+<td>请求标识码，随机数，唯一</td>
+</tr>
+<tr>
+<td style="text-align:left">face_token</td>
+<td style="text-align:center">是</td>
+<td>string</td>
+<td>人脸图片的唯一标识</td>
+</tr>
+<tr>
+<td style="text-align:left">location</td>
+<td style="text-align:center">是</td>
+<td>array</td>
+<td>人脸在图片中的位置</td>
+</tr>
+</tbody>
+</table>
 <p><strong>返回实例：</strong></p>
 <blockquote>
 <p>{<br>  “face_token”: “2fa64a88a9d5118916f9a303782a97d3”,<br>  “location”: {<br>      “left”: 117,<br>      “top”: 131,<br>      “width”: 172,<br>      “height”: 170,<br>      “rotation”: 4<br>  }<br>}</p>
 </blockquote>
+<h3 id="人脸检测"><a href="#人脸检测" class="headerlink" title="人脸检测"></a>人脸检测</h3><p>检测上传的照片中是否含有人脸</p>
+<p><strong>param参数列表</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名称</th>
+<th style="text-align:center">是否必选</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">image</td>
+<td style="text-align:center">是</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断</td>
+</tr>
+<tr>
+<td style="text-align:left">image_type</td>
+<td style="text-align:center">是</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>图片类型 BASE64:图片的base64值，base64编码后的图片数据，需urlencode，编码后的图片大小不超过2M；URL:图片的 URL地址( 可能由于网络等原因导致下载图片时间过长)；FACE_TOKEN: 人脸图片的唯一标识，调用人脸检测接口时，会为每个人脸图片赋予一个唯一的FACE_TOKEN，同一张图片多次检测得到的FACE_TOKEN是同一个</td>
+</tr>
+<tr>
+<td style="text-align:left">face_field</td>
+<td style="text-align:center">否</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>包括age,beauty,expression,face_shape,gender,glasses,landmark,landmark72,landmark150，race,quality,eye_status,emotion,face_type信息逗号分隔. 默认只返回face_token、人脸框、概率和旋转角度</td>
+</tr>
+<tr>
+<td style="text-align:left">max_face_num</td>
+<td style="text-align:center">否</td>
+<td>String</td>
+<td>1</td>
+<td>最多处理人脸的数目，默认值为1，仅检测图片中面积最大的那个人脸；最大值10，检测图片中面积最大的几张人脸。</td>
+</tr>
+<tr>
+<td style="text-align:left">face_type</td>
+<td style="text-align:center">否</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>人脸的类型 LIVE表示生活照：通常为手机、相机拍摄的人像图片、或从网络获取的人像图片等IDCARD表示身份证芯片照：二代身份证内置芯片中的人像照片 WATERMARK表示带水印证件照：一般为带水印的小图，如公安网小图 CERT表示证件照片：如拍摄的身份证、工卡、护照、学生证等证件图片 默认LIVE</td>
+</tr>
+<tr>
+<td style="text-align:left">liveness_control</td>
+<td style="text-align:center">否</td>
+<td>String</td>
+<td>NONE</td>
+<td>活体检测控制 NONE: 不进行控制 LOW:较低的活体要求(高通过率 低攻击拒绝率) NORMAL: 一般的活体要求(平衡的攻击拒绝率, 通过率) HIGH: 较高的活体要求(高攻击拒绝率 低通过率) 默认NONE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>java代码</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">package com.yzctest.face.tool.face;</span><br><span class="line"></span><br><span class="line">import com.yzctest.face.tool.Auth;</span><br><span class="line">import com.yzctest.face.tool.GsonUtils;</span><br><span class="line">import com.yzctest.face.tool.HttpUtil;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">public class FaceDetect &#123;</span><br><span class="line"></span><br><span class="line">    ///传进来的参数是图片的BASE64数据形式</span><br><span class="line">    public static String detect(String image)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        //百度人脸识别API</span><br><span class="line">        String url=&quot;https://aip.baidubce.com/rest/2.0/face/v3/detect&quot;;</span><br><span class="line"></span><br><span class="line">        try&#123;</span><br><span class="line">            Map&lt;String,String&gt; options=new HashMap&lt;String,String&gt;();</span><br><span class="line">            options.put(&quot;image&quot;,image);</span><br><span class="line">            options.put(&quot;max_face_num&quot;,&quot;2&quot;);</span><br><span class="line">            options.put(&quot;image_type&quot;, &quot;BASE64&quot;);</span><br><span class="line">            String param = GsonUtils.toJson(options);</span><br><span class="line"></span><br><span class="line">            Auth auth = new Auth();</span><br><span class="line">            String accessToken = auth.getAuth();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            //以百度云文档调用方式1 以URL方式请求，必须获取access_Token,param,字符串的参数</span><br><span class="line">            String results = HttpUtil.post(url, accessToken, &quot;application/json&quot;, param);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            String result=results.split(&quot;,&quot;)[5];</span><br><span class="line">            String people=&quot;0&quot;;</span><br><span class="line">            if(result!=null)</span><br><span class="line">            &#123;</span><br><span class="line">                people=result.split(&quot;:&quot;)[2];</span><br><span class="line">            &#125;</span><br><span class="line">            return people;</span><br><span class="line"></span><br><span class="line">        &#125;catch (Exception e)</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        return &quot;0&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>返回的参数列表</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段</th>
+<th style="text-align:center">必选</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">face_num</td>
+<td style="text-align:center">是</td>
+<td>int</td>
+<td>检测到的图片中的人脸数量</td>
+</tr>
+<tr>
+<td style="text-align:left">face_list</td>
+<td style="text-align:center">是</td>
+<td>array</td>
+<td>人脸信息列表，具体包含的参数参考下面的列表。(官网javaSDK V3查看)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>返回实例</strong></p>
+<blockquote>
+<p>{<br>  “face_num”: 1,<br>  “face_list”: [{}]<br>}</p>
+</blockquote>
+<h3 id="人脸对比"><a href="#人脸对比" class="headerlink" title="人脸对比"></a>人脸对比</h3><p>给出两张照片的相似程度</p>
+<p><strong>param参数</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:center">必选</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">image</td>
+<td style="text-align:center">是</td>
+<td>string</td>
+<td>图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断。 两张图片通过json格式上传，格式参考表格下方示例</td>
+</tr>
+<tr>
+<td style="text-align:left">image_type</td>
+<td style="text-align:center">是</td>
+<td>string</td>
+<td>图片类型 BASE64:图片的base64值，base64编码后的图片数据，需urlencode，编码后的图片大小不超过2M；URL:图片的 URL地址( 可能由于网络等原因导致下载图片时间过长)；FACE_TOKEN: 人脸图片的唯一标识，调用人脸检测接口时，会为每个人脸图片赋予一个唯一的FACE_TOKEN，同一张图片多次检测得到的FACE_TOKEN是同一个。</td>
+</tr>
+<tr>
+<td style="text-align:left">face_type</td>
+<td style="text-align:center">否</td>
+<td>string</td>
+<td>人脸的类型 LIVE表示生活照：通常为手机、相机拍摄的人像图片、或从网络获取的人像图片等，IDCARD表示身份证芯片照：二代身份证内置芯片中的人像照片， WATERMARK表示带水印证件照：一般为带水印的小图，如公安网小图 CERT表示证件照片：如拍摄的身份证、工卡、护照、学生证等证件图片 默认LIVE</td>
+</tr>
+<tr>
+<td style="text-align:left">quality_control</td>
+<td style="text-align:center">否</td>
+<td>string</td>
+<td>图片质量控制 NONE: 不进行控制 LOW:较低的质量要求 NORMAL: 一般的质量要求 HIGH: 较高的质量要求 默认 NONE</td>
+</tr>
+<tr>
+<td style="text-align:left">liveness_control</td>
+<td style="text-align:center">否</td>
+<td>string</td>
+<td>活体检测控制 NONE: 不进行控制 LOW:较低的活体要求(高通过率 低攻击拒绝率) NORMAL: 一般的活体要求(平衡的攻击拒绝率, 通过率) HIGH: 较高的活体要求(高攻击拒绝率 低通过率) 默认NONE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>java代码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">package com.yzctest.face.tool.face;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import com.yzctest.face.tool.*;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class FaceMatch &#123;</span><br><span class="line"></span><br><span class="line">    ///传进来的参数是图片的BASE64数据形式</span><br><span class="line">    public static String match(String image1) &#123;</span><br><span class="line">        // 请求url</span><br><span class="line">        String url = &quot;https://aip.baidubce.com/rest/2.0/face/v3/match&quot;;</span><br><span class="line">        try &#123;</span><br><span class="line"></span><br><span class="line">            //byte[] bytes1 = FileUtil.readFileByBytes(image1Path);</span><br><span class="line">            byte[] bytes2 = FileUtil.readFileByBytes(&quot;./picture/1.jpg&quot;);</span><br><span class="line">            //String image1 = Base64Util.encode(bytes1);</span><br><span class="line">            String image2 = Base64Util.encode(bytes2);</span><br><span class="line"></span><br><span class="line">            List&lt;Map&lt;String, Object&gt;&gt; images = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">            Map&lt;String, Object&gt; map1 = new HashMap&lt;&gt;();</span><br><span class="line">            map1.put(&quot;image&quot;, image1);</span><br><span class="line">            map1.put(&quot;image_type&quot;, &quot;BASE64&quot;);</span><br><span class="line">            map1.put(&quot;face_type&quot;, &quot;LIVE&quot;);</span><br><span class="line">            map1.put(&quot;quality_control&quot;, &quot;LOW&quot;);</span><br><span class="line">            map1.put(&quot;liveness_control&quot;, &quot;NORMAL&quot;);</span><br><span class="line"></span><br><span class="line">            Map&lt;String, Object&gt; map2 = new HashMap&lt;&gt;();</span><br><span class="line">            map2.put(&quot;image&quot;, image2);</span><br><span class="line">            map2.put(&quot;image_type&quot;, &quot;BASE64&quot;);</span><br><span class="line">            map2.put(&quot;face_type&quot;, &quot;LIVE&quot;);</span><br><span class="line">            map2.put(&quot;quality_control&quot;, &quot;LOW&quot;);</span><br><span class="line">            map2.put(&quot;liveness_control&quot;, &quot;NORMAL&quot;);</span><br><span class="line"></span><br><span class="line">            images.add(map1);</span><br><span class="line">            images.add(map2);</span><br><span class="line"></span><br><span class="line">            String param = GsonUtils.toJson(images);</span><br><span class="line">            Auth auth = new Auth();</span><br><span class="line">            String accessToken = auth.getAuth();</span><br><span class="line">            // 注意这里仅为了简化编码每一次请求都去获取access_token，线上环境access_token有过期时间， 客户端可自行缓存，过期后重新获取。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            String results = HttpUtil.post(url, accessToken, &quot;application/json&quot;, param);</span><br><span class="line">            String result = results.split(&quot;,&quot;)[5];</span><br><span class="line">            String score=&quot;0&quot;;</span><br><span class="line">            if (result != null)</span><br><span class="line">            &#123;</span><br><span class="line">                score=result.split(&quot;:&quot;)[2];</span><br><span class="line">            &#125;</span><br><span class="line">            return score;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        return &quot;0&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>返回参数列表</strong></p>
+<p>参数名|必选|类型|说明<br>score|是|float|人脸相似度得分<br>face_list|是|array|人脸信息列表<br>+face_token|是|string|人脸的唯一标志</p>
+<p><strong>返回实例</strong></p>
+<blockquote>
+<p>{<br>  “score”: 44.3,<br>  “face_list”: [  //返回的顺序与传入的顺序保持一致<br>      {<br>          “face_token”: “fid1”<br>      },<br>      {<br>          “face_token”: “fid2”<br>      }<br>  ]<br>}</p>
+</blockquote>
+<h3 id="人脸搜索"><a href="#人脸搜索" class="headerlink" title="人脸搜索"></a>人脸搜索</h3><p>通过一张图片，从人脸库中寻找相似度最高的人脸，并返回信息</p>
+<p><strong>param参数</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名称</th>
+<th style="text-align:center">是否必选</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">image</td>
+<td style="text-align:center">是</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断</td>
+</tr>
+<tr>
+<td style="text-align:left">image_type</td>
+<td style="text-align:center">是</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>图片类型 BASE64:图片的base64值，base64编码后的图片数据，需urlencode，编码后的图片大小不超过2M；URL:图片的 URL地址( 可能由于网络等原因导致下载图片时间过长)；FACE_TOKEN: 人脸图片的唯一标识，调用人脸检测接口时，会为每个人脸图片赋予一个唯一的FACE_TOKEN，同一张图片多次检测得到的FACE_TOKEN是同一个</td>
+</tr>
+<tr>
+<td style="text-align:left">group_id_list</td>
+<td style="text-align:center">是</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>从指定的group中进行查找 用逗号分隔，上限20个</td>
+</tr>
+<tr>
+<td style="text-align:left">max_face_num</td>
+<td style="text-align:center">否</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>最多处理人脸的数目默认值为1(仅检测图片中面积最大的那个人脸) 最大值10</td>
+</tr>
+<tr>
+<td style="text-align:left">match_threshold</td>
+<td style="text-align:center">否</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>匹配阈值（设置阈值后，score低于此阈值的用户信息将不会返回） 最大100 最小0 默认80 此阈值设置得越高，检索速度将会越快，推荐使用默认阈值80</td>
+</tr>
+<tr>
+<td style="text-align:left">quality_control</td>
+<td style="text-align:center">否</td>
+<td>String</td>
+<td>NONE</td>
+<td>图片质量控制 NONE: 不进行控制 LOW:较低的质量要求 NORMAL: 一般的质量要求 HIGH: 较高的质量要求 默认 NONE</td>
+</tr>
+<tr>
+<td style="text-align:left">liveness_control</td>
+<td style="text-align:center">否</td>
+<td>String</td>
+<td>NONE</td>
+<td>活体检测控制 NONE: 不进行控制 LOW:较低的活体要求(高通过率 低攻击拒绝率) NORMAL: 一般的活体要求(平衡的攻击拒绝率, 通过率) HIGH: 较高的活体要求(高攻击拒绝率 低通过率) 默认NONE</td>
+</tr>
+<tr>
+<td style="text-align:left">user_id</td>
+<td style="text-align:center">否</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>当需要对特定用户进行比对时，指定user_id进行比对。即人脸认证功能。</td>
+</tr>
+<tr>
+<td style="text-align:left">max_user_num</td>
+<td style="text-align:center">否</td>
+<td>String</td>
+<td>&nbsp;</td>
+<td>查找后返回的用户数量。返回相似度最高的几个用户，默认为1，最多返回50个。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>java代码实例</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package com.yzctest.face.tool.face;</span><br><span class="line"></span><br><span class="line">import com.yzctest.face.tool.Auth;</span><br><span class="line">import com.yzctest.face.tool.GsonUtils;</span><br><span class="line">import com.yzctest.face.tool.HttpUtil;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">public class FaceSearch &#123;</span><br><span class="line"></span><br><span class="line">    ///传进来的参数是图片的BASE64数据形式</span><br><span class="line">    public static String FaceSearch(String image)</span><br><span class="line">    &#123;</span><br><span class="line">        String url=&quot;https://aip.baidubce.com/rest/2.0/face/v3/search&quot;;</span><br><span class="line">        try &#123;</span><br><span class="line">            Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">            map.put(&quot;image&quot;, image); //图片base64数据</span><br><span class="line">            map.put(&quot;liveness_control&quot;, &quot;NORMAL&quot;);  //活体检测控制一般的</span><br><span class="line">            map.put(&quot;group_id_list&quot;, &quot;Face_Login&quot;);  //指定用户组group 人脸库总已经存在的用户组</span><br><span class="line">            map.put(&quot;image_type&quot;, &quot;BASE64&quot;);     //图片类型，这里转化过的base64</span><br><span class="line">            map.put(&quot;quality_control&quot;, &quot;LOW&quot;);   //图片质量控制</span><br><span class="line"></span><br><span class="line">            String param = GsonUtils.toJson(map);</span><br><span class="line">            Auth auth = new Auth();</span><br><span class="line">            String accessToken = auth.getAuth();</span><br><span class="line">            // 注意这里仅为了简化编码每一次请求都去获取access_token，线上环境access_token有过期时间， 客户端可自行缓存，过期后重新获取。</span><br><span class="line"></span><br><span class="line">            String results = HttpUtil.post(url, accessToken, &quot;application/json&quot;, param);</span><br><span class="line">            return results;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>返回的参数列表</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段</th>
+<th style="text-align:center">必选</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">face_token</td>
+<td style="text-align:center">是</td>
+<td>string</td>
+<td>人脸标志</td>
+</tr>
+<tr>
+<td style="text-align:left">user_list</td>
+<td style="text-align:center">是</td>
+<td>array</td>
+<td>匹配的用户信息列表</td>
+</tr>
+<tr>
+<td style="text-align:left">+group_id</td>
+<td style="text-align:center">是</td>
+<td>string</td>
+<td>用户所属的group_id</td>
+</tr>
+<tr>
+<td style="text-align:left">+user_id</td>
+<td style="text-align:center">是</td>
+<td>string</td>
+<td>用户的user_id</td>
+</tr>
+<tr>
+<td style="text-align:left">+user_info</td>
+<td style="text-align:center">是</td>
+<td>string</td>
+<td>注册用户时携带的user_info</td>
+</tr>
+<tr>
+<td style="text-align:left">+score</td>
+<td style="text-align:center">是</td>
+<td>float</td>
+<td>用户的匹配得分</td>
+</tr>
+</tbody>
+</table>
+<p><strong>返回实例</strong></p>
+<blockquote>
+<p>{<br>  “face_token”: “fid”,<br>  “user_list”: [<br>     {<br>        “group_id” : “test1”,<br>        “user_id”: “u333333”,<br>        “user_info”: “Test User”,<br>        “score”: 99.3<br>    }<br>  ]<br>}</p>
+</blockquote>
+<p><strong><em>参考链接<a href="https://www.cnblogs.com/LiuFqiang/p/10846973.html" target="_blank" rel="noopener">https://www.cnblogs.com/LiuFqiang/p/10846973.html</a></em></strong></p>
 
       
     </div>
@@ -419,7 +705,7 @@
         <p><span>本文标题:</span><a href="/2019/06/18/face-identify2/">face_identify2</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">ZhiCheng Yan</a></p>
         <p><span>发布时间:</span>2019-06-18, 07:35:19</p>
-        <p><span>最后更新:</span>2019-06-18, 20:29:23</p>
+        <p><span>最后更新:</span>2019-06-18, 22:50:32</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/06/18/face-identify2/" title="face_identify2">http://wxb75664532.github.io/2019/06/18/face-identify2/</a>
             <span class="copy-path" data-clipboard-text="原文: http://wxb75664532.github.io/2019/06/18/face-identify2/　　作者: ZhiCheng Yan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -434,16 +720,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/06/18/face-identify/">
-                    face_identify
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/03/10/Mysql报警告/">
-                    Mysql报警告
+                <a href="/2019/06/18/face-identify/">
+                    face_identify
                 </a>
             </div>
         
@@ -455,7 +735,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#请求方式"><span class="toc-number">1.</span> <span class="toc-text">请求方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#请求URL数据格式"><span class="toc-number">1.1.</span> <span class="toc-text">请求URL数据格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">2.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#人脸注册"><span class="toc-number">2.1.</span> <span class="toc-text">人脸注册</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">1.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#人脸注册"><span class="toc-number">1.1.</span> <span class="toc-text">人脸注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#人脸检测"><span class="toc-number">1.2.</span> <span class="toc-text">人脸检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#人脸对比"><span class="toc-number">1.3.</span> <span class="toc-text">人脸对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#人脸搜索"><span class="toc-number">1.4.</span> <span class="toc-text">人脸搜索</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -508,21 +788,19 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/06/18/face-identify/" title="上一篇: face_identify">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/03/10/Mysql报警告/" title="下一篇: Mysql报警告">
+            <a href="/2019/06/18/face-identify/" title="下一篇: face_identify">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/06/18/face-identify/">face_identify</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/18/face-identify2/">face_identify2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/Mysql报警告/">Mysql报警告</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/Bean的装配方式-2/">Bean的装配方式(2)-基于注释的装配</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/05/Bean的装配方式/">Bean的装配方式(1)-基于XML配置的装配</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/03/Andriod-Studio无法打开虚拟机/">Andriod Studio无法打开虚拟机</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/LNK2019问题/">LNK2019问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/My-frist-Blog/">My frist Blog</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/06/18/face-identify2/">face_identify2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/18/face-identify/">face_identify</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/10/Mysql报警告/">Mysql报警告</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/Bean的装配方式-2/">Bean的装配方式(2)-基于注释的装配</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/05/Bean的装配方式/">Bean的装配方式(1)-基于XML配置的装配</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/03/Andriod-Studio无法打开虚拟机/">Andriod Studio无法打开虚拟机</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/LNK2019问题/">LNK2019问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/My-frist-Blog/">My frist Blog</a></li></ul>
 
 
 
